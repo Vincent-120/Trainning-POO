@@ -1,0 +1,26 @@
+
+    {
+        "0" : {
+            "name":"Lame",
+            "dps":"10",
+            "description":"Lame ancienne avec un manche aérodinamyque"
+        }, 
+        
+        "1" : {
+            "name":"Lame_tranchante",
+            "dps":"12",
+            "description":"Lame ancienne avec un manche aérodinamyque, la lame a un double tranchant afin d'avoir une meilleur maniabilité"
+        }, 
+        "2" : {
+            "name":"Lame_pourfandeuse",
+            "dps":"14",
+            "description":"Lame ancienne avec un manche aérodinamyque, la lame est tellement éguiser que le vent ce coupe dessus"
+        }, 
+        "3" : {
+            "name":"Lame_du_chaos",
+            "dps":"17",
+            "description":"Lame sombre et ancienne avec un manche adaptif, les légendes raconte que la lame est maudite, elle maudit son porteur ainsi que les gens qui s'en sorte vivant"
+        }
+
+    }
+

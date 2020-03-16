@@ -1,5 +1,7 @@
 let armList=[];
 let a= 0 ;
+
+
 +async function IIFE() {
 
     //? createur du perso & arme
@@ -34,30 +36,25 @@ let a= 0 ;
             }
         };
     const armList = await fetch("arme.json").then(res => res.json());
-    //? Création de l'arme
     const weapon = new Weapon(armList[a].name,armList[a].dps,armList[a].description);
-    console.log(weapon)
+    //? Création de l'arme
+    document.getElementById('next').addEventListener('click',(weapon)=>{
+        console.log("next");
+        a =+1 
+        weapon = new Weapon(armList[a].name,armList[a].dps,armList[a].description);
+        return weapon
+    })
+    
+
     //? Création du personnage
     const huskyix = new Personnage("Huskyix",100,7,weapon);
-    console.log(huskyix);
-        
+
+    document.getElementById('name').innerHTML = huskyix.name
+    document.getElementById('pv').innerHTML = huskyix.pv
+    document.getElementById('dps').innerHTML = huskyix.dps
+    document.getElementById('name_arme').innerHTML = weapon.name
+    document.getElementById('dps_arme').innerHTML = weapon.dps
+    document.getElementById('desc').innerHTML = weapon.description
     }();
-    document.getElementById('name').addEventListener('click',()=>{
-        a =+1 
-    })
-    document.getElementById('pv').addEventListener('click',()=>{
-        a =+1 
-    })
-    document.getElementById('dps').addEventListener('click',()=>{
-        a =+1 
-    })
-    document.getElementById('next').addEventListener('click',()=>{
-        a =+1 
-    })
-    document.getElementById('next').addEventListener('click',()=>{
-        a =+1 
-    })
-    document.getElementById('next').addEventListener('click',()=>{
-        a =+1 
-    })
+    
     

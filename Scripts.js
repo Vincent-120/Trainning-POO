@@ -1,60 +1,71 @@
-let armList=[];
-let a= 0 ;
-
-
-+async function IIFE() {
-
-    //? createur du perso & arme
-        class Personnage {
-            constructor(name, pv, dps, weapon = null){
-                this.name = name;
-                this.pv = pv;
-                this.dps = dps;
-                this.weapon = weapon;
+class Personnage {
+    constructor(nom,sante,force){
+        this.nom = nom;
+        this.sante = sante;
+        this.force = force;
+        this.xp = 0;
+        this.inventaire = {
+            or = 1,
+            potionDeSoin = 1
+        }
+    }
+    Decrire(){
+        return `${this.nom} a ${this.sante} point de vie, ${this.force} en force et ${this.xp} points d'experience`;
+    }
+    Attack(cible){
+        if (this.sante > 0) {
+            const degat = this.force;
+            console.log(`${this.nom} attack ${cible.nom} et lui inflige ${degat} point de dégats`);
+            cible.sante -= degat;
+            if (cible.sante > 0) {
+                console.log(`${cible.nom} a encore ${cible.sante} points de vie`)
             }
-            Display(){
-                return(`${this.name} a ${this.pv}Pv et Frappe de 0 a ${this.dps} dps`);
+            else {
+                cible.sante = 0;
+                const bonusXP = 10;
+                console.log(
+                  `${this.nom} a tué ${
+                    cible.nom
+                  } et gagne ${bonusXP} points d'expérience`
+                );
+                this.xp += bonusXP;
+              }
+            } else {
+              console.log(
+                `${this.nom} n'a plus de points de vie et ne pas pas attaquer`
+              );
             }
-            Hit(){
-                let degat = Math.floor(Math.random()*Math.floor(this.dps));
-                if (this.weapon !== null) {
-                    let degatArme = Math.floor(Math.random()*Math.floor(this.dps));
-                    console.log("hit");
-                    return degatArme + degat
-                }
-                return degat ;
-            }
-        };
-        class Weapon {
-            constructor(name, dps, description){
-                this.name = name;
-                this.dps = dps;
-                this.description = description;
-            }
-            Display(){
-                return(`${this.name} possède 0-${this.dps}dps`);
-            }
-        };
-    const armList = await fetch("arme.json").then(res => res.json());
-    const weapon = new Weapon(armList[a].name,armList[a].dps,armList[a].description);
-    //? Création de l'arme
-    document.getElementById('next').addEventListener('click',(weapon)=>{
-        console.log("next");
-        a =+1 
-        weapon = new Weapon(armList[a].name,armList[a].dps,armList[a].description);
-        return weapon
-    })
-    
+          }
+          Heal(potionDeSoin){
+              if (potionDeSoin > 0 ) {
+                  
+              }
+          }
+        }
 
-    //? Création du personnage
-    const huskyix = new Personnage("Huskyix",100,7,weapon);
+const player1 = new Personnage("Player1",150,25);
+const player2 = new Personnage("Player2",130,30);
 
-    document.getElementById('name').innerHTML = huskyix.name
-    document.getElementById('pv').innerHTML = huskyix.pv
-    document.getElementById('dps').innerHTML = huskyix.dps
-    document.getElementById('name_arme').innerHTML = weapon.name
-    document.getElementById('dps_arme').innerHTML = weapon.dps
-    document.getElementById('desc').innerHTML = weapon.description
-    }();
-    
-    
+console.log("Bienvenu dans ce jeu d'aventure ! Voici nos courageux héros:");
+
+console.log("------------------------------------------------------------------------------");
+
+console.log(player1.Decrire());
+console.log(player2.Decrire());
+
+console.log("------------------------------------------------------------------------------");
+
+const monstre = new Personnage("zoble",40,20);
+console.log(`un affreux ${monstre.nom} est apparut`);
+
+console.log("------------------------------------------------------------------------------");
+
+monstre.Attack(player1);
+monstre.Attack(player2);
+player1.Attack(monstre);
+player2.Attack(monstre);
+
+console.log("------------------------------------------------------------------------------");
+
+console.log(player1.Decrire())
+console.log(player2.Decrire())
